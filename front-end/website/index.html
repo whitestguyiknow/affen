@@ -22,7 +22,7 @@
 <script type="text/javascript">
 
 
-var windowSize = 200;
+var windowSize = 300;
 
 function init(data) {
 
@@ -68,10 +68,10 @@ function init(data) {
       // bottom bar
       plot_bar(
             ctx,           // context
-            height/3 + 5,  // top
+            height/3+5+0.5*height/3+2.5*0.5,  // top
             0,             // left
             width,         // width
-            2*height/3 - 5,// height
+            height/3 - 2.5,// height
             second,        // data
             index,         // index
             windowSize,    // window size
