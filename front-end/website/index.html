@@ -1,14 +1,93 @@
+<!DOCTYPE html>
 <html>
 <head>
 
+<meta charset="utf-8">
+<script type="text/javascript" src="util/math.js"></script>
 <script type="text/javascript" src="plot/plot_bar.js"></script>
 <script type="text/javascript" src="plot/plot_line.js"></script>
+<script type="text/javascript" src="data/data.js"></script>
 <script type="text/javascript">
-// TODO: core
+
+function setup() {
+   // setup
+   console.log("Doing setup");
+
+   var mainCanvas = document.getElementById("main-canvas");
+   var mainCtx = mainCanvas.getContext("2d");
+
+   var windowSize = 10;
+
+   var first = function(index) {
+      return data[3*index];
+   }
+
+   var second = function(index) {
+      return data[3*index + 1];
+   }
+
+   var third = function(index) {
+      return data[3*index + 2];
+   }
+
+   var index = 0;
+
+   var update = function() {
+
+      mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+      // top bar
+      plot_bar(
+            mainCtx,       // context
+            0,             // top
+            0,             // left
+            640,           // width
+            240,           // height
+            first,         // data
+            index,         // index
+            windowSize,    // window size
+            true,          // axis
+            "#00ff00"      // color
+            );
+
+      // bottom bar
+      plot_bar(
+            mainCtx,       // context
+            240,           // top
+            0,             // left
+            640,           // width
+            240,           // height
+            second,        // data
+            index,         // index
+            windowSize,    // window size
+            true,          // axis
+            "#0000ff"      // color
+            );
+
+      // bottom line
+      plot_line(
+            mainCtx,       // context
+            240,           // top
+            0,             // left
+            640,           // width
+            240,           // height
+            third,        // data
+            index,         // index
+            windowSize,    // window size
+            false,         // axis
+            "#ff0000"      // color
+            );
+
+      ++index;
+   }
+
+   setInterval(update, 1000);
+}
+
 </script>
 
 </head>
-<body>
+<body onload="setup()">
 
 <canvas id="main-canvas" width="640" height="480"></canvas>
 
