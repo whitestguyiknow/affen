@@ -32,7 +32,7 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
          ctx.lineTo(x, y);
          ctx.stroke();
       } else {
-         var y = top + step*8;
+         var y = top + step*9;
          ctx.moveTo(x, top);
          ctx.lineTo(x, y);
          ctx.stroke();

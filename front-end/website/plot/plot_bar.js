@@ -1,6 +1,7 @@
 function plot_bar(ctx, top, left, width, height, data, index, window, axis, color) {
 
-   var dx = width/(window - 1);
+   var x_offset = 100;
+   var dx = (width-x_offset)/(window - 1);
 
    var lower = min(data, index, window);
    var upper = max(data, index, window);
@@ -18,7 +19,7 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
    ctx.beginPath();
    for (var i = 0; i < window; ++i) {
 
-      var x = left + i*dx;
+      var x = left + i*dx+x_offset;
       var y = top + height/2 - data(i + index)/stretch*height;
 
       ctx.moveTo(x, top + height/2);
@@ -49,15 +50,15 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
 
          // marker
          ctx.beginPath();
-         ctx.moveTo(left, y);
-         ctx.lineTo(left + 10, y);
+         ctx.moveTo(left + width, y);
+         ctx.lineTo(left + width - 10, y);
          ctx.strokeStyle = color;
          ctx.stroke();
 
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((stretch/2 - i*stretch/count).toExponential(1), left + 15, y + 5);
+         ctx.fillText((stretch/2 - i*stretch/count).toExponential(1), left + width - 60, y + 5);
       } else {
          // false = right
 
