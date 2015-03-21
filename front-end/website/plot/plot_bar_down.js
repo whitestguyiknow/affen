@@ -1,6 +1,7 @@
 function plot_bar_down(ctx, top, left, width, height, data, index, window, axis, color) {
 
-   var dx = width/(window - 1);
+   var x_offset = 50;
+   var dx = (width-x_offset)/(window - 1);
 
    var lower = min(data, index, window);
    var upper = max(data, index, window);
@@ -21,7 +22,7 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
    // graph
    for (var i = 0; i < window; ++i) {
 
-      var x = left + i*dx;
+      var x = left + i*dx + x_offset;
       var tmp = - Math.log(data(i + index))/Math.log(10);
       if (tmp > 0) {
 
