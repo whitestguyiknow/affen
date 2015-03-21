@@ -68,17 +68,17 @@ var tickLabels = [";","10%","1%","0.1%","1e-4","1e-5","1e-6","1e-7","1e-8","1e-9
          ctx.globalAlpha = 1.0;
 
          // marker
-         ctx.beginPath();
+         /*ctx.beginPath();
          ctx.moveTo(left, y);
          ctx.lineTo(left + 10, y);
          ctx.strokeStyle = color;
-         ctx.stroke();
+         ctx.stroke();*/
 
          // unit
          ctx.font = "10px Arial";
          ctx.fillStyle = color;
          //ctx.fillText((i/count).toFixed(4), left + 15, y + 5);
-         ctx.fillText(tickLabels[i], left + 15, y + 5);
+         ctx.fillText(tickLabels[i], left, y + 5);
       } else {
          // false = right
 

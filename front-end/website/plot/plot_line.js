@@ -44,16 +44,16 @@ function plot_line(ctx, top, left, width, height, data, index, window, axis, col
          ctx.globalAlpha = 1.0;
 
          // marker
-         ctx.beginPath();
+         /*ctx.beginPath();
          ctx.moveTo(left, y);
          ctx.lineTo(left + 10, y);
          ctx.strokeStyle = color;
-         ctx.stroke();
+         ctx.stroke();*/
 
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((upper - i*(upper - lower)/count).toFixed(3), left + 15, y + 5);
+         ctx.fillText((upper - i*(upper - lower)/count).toFixed(3), left, y + 5);
       } else {
          // false = right
 
@@ -67,16 +67,16 @@ function plot_line(ctx, top, left, width, height, data, index, window, axis, col
          ctx.globalAlpha = 1.0;
 
          // marker
-         ctx.beginPath();
+         /*ctx.beginPath();
          ctx.moveTo(left, y);
          ctx.lineTo(left + 10, y);
          ctx.strokeStyle = color;
-         ctx.stroke();
+         ctx.stroke();*/
 
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((upper - i*(upper - lower)/count).toFixed(3), left + 10, y + 5);
+         ctx.fillText((upper - i*(upper - lower)/count).toFixed(3), left, y + 5);
 
       }
    }
