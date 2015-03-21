@@ -1,6 +1,6 @@
 function plot_bar_down(ctx, top, left, width, height, data, index, window, axis, color) {
 
-   var x_offset = 50;
+   var x_offset = 70;
    var dx = (width-x_offset)/(window - 1);
 
    var lower = min(data, index, window);
