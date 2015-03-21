@@ -29,7 +29,7 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
    ctx.stroke();
 
    // axis
-   var count = 6;
+   var count = 3;
    var step = height/count;
 
    for (var i = 1; i < count; ++i) {

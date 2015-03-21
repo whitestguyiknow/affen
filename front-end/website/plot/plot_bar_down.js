@@ -22,10 +22,10 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
    for (var i = 0; i < window; ++i) {
 
       var x = left + i*dx;
-      var tmp = - 2*Math.log(data(i + index))/Math.log(10);
+      var tmp = - Math.log(data(i + index))/Math.log(10);
       if (tmp > 0) {
 
-      if (tmp <= 8) {
+      if (tmp <= 9) {
          var y = top + step*Math.max(tmp,0);
          ctx.moveTo(x, top);
          ctx.lineTo(x, y);
@@ -42,14 +42,14 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
          ctx.stroke();
       }
    }
-   
+
    }
    ctx.strokeStyle = color;
    ctx.stroke();
 
 
 
-var tickLabels = [";","10%","1%","0.1%","1e-3","1e-4","1e-5","1e-6","1e-7","1e-8","1e-9"];
+var tickLabels = [";","10%","1%","0.1%","1e-4","1e-5","1e-6","1e-7","1e-8","1e-9","1e-10"];
 
    for (var i = 1; i < count; ++i) {
       var y = top + i*step;
