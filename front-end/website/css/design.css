@@ -7,9 +7,9 @@
 #wrapper::after{
   content: "";
   /*background: url("images/background.jpg");
-  opacity: 0.1;*/
+  opacity: 0.1;
   background: #E5F6FD;
-  opacity: 1;
+  opacity: 1;*/
   top: 0;
   left: 0;
   bottom: 0;
@@ -43,6 +43,10 @@ html, body{
 
 .seven_buttons{
 	margin-bottom: 15px;
+}
+
+.seven_logo{
+	margin-bottom:25px;
 }
 
 canvas{
