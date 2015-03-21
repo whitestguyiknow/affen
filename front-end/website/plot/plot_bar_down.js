@@ -19,16 +19,30 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
    var step = height/count;
 
    // graph
-   ctx.beginPath();
-
    for (var i = 0; i < window; ++i) {
 
       var x = left + i*dx;
-      var y = top + step*Math.max(- ((Math.log(data(i + index))/Math.log(10))),0);
+      var tmp = - 2*Math.log(data(i + index))/Math.log(10);
+      if (tmp > 0) {
 
-      ctx.moveTo(x, top);
-      ctx.lineTo(x, y);
-
+      if (tmp <= 8) {
+         var y = top + step*Math.max(tmp,0);
+         ctx.moveTo(x, top);
+         ctx.lineTo(x, y);
+         ctx.stroke();
+      } else {
+         var y = top + step*8;
+         ctx.moveTo(x, top);
+         ctx.lineTo(x, y);
+         ctx.stroke();
+         ctx.beginPath();
+         ctx.arc(x, y, 2, 0, 2 * Math.PI, false);
+         ctx.fillStyle = 'red';
+         ctx.fill();
+         ctx.stroke();
+      }
+   }
+   
    }
    ctx.strokeStyle = color;
    ctx.stroke();
