@@ -14,12 +14,17 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
    ctx.strokeStyle = color;
    ctx.stroke();
 
+   // axis
+   var count = 10;
+   var step = height/count;
+
    // graph
    ctx.beginPath();
+
    for (var i = 0; i < window; ++i) {
 
       var x = left + i*dx;
-      var y = top + data(i + index)*height;
+      var y = top + step*Math.max(- ((Math.log(data(i + index))/Math.log(10))),0);
 
       ctx.moveTo(x, top);
       ctx.lineTo(x, y);
@@ -28,9 +33,9 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
    ctx.strokeStyle = color;
    ctx.stroke();
 
-   // axis
-   var count = 6;
-   var step = height/count;
+
+
+var tickLabels = [";","10%","1%","0.1%","1e-3","1e-4","1e-5","1e-6","1e-7","1e-8","1e-9"];
 
    for (var i = 1; i < count; ++i) {
       var y = top + i*step;
@@ -55,9 +60,10 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
          ctx.stroke();
 
          // unit
-         ctx.font = "16px Arial";
+         ctx.font = "10px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((i/count).toFixed(3), left + 15, y + 5);
+         //ctx.fillText((i/count).toFixed(4), left + 15, y + 5);
+         ctx.fillText(tickLabels[i], left + 15, y + 5);
       } else {
          // false = right
 
@@ -78,7 +84,7 @@ function plot_bar_down(ctx, top, left, width, height, data, index, window, axis,
          ctx.stroke();
 
          // unit
-         ctx.font = "16px Arial";
+         ctx.font = "10px Arial";
          ctx.fillStyle = color;
          ctx.fillText((i/count).toFixed(3), left + width - 60, y + 5);
 
