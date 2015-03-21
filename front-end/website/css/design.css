@@ -35,7 +35,10 @@ html, body{
 }
 
 .seven_footer{
-	margin-top: 20px;
+}
+
+.seven_divider{
+	border-top: 1px solid #DDD;
 }
 
 canvas{
@@ -57,5 +60,5 @@ canvas{
 }
 
 .newsfeed_block p{
-	margin: 15px 0px;
+	margin: 20px 0px;
 }
