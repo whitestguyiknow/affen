@@ -24,3 +24,12 @@ html, body{
 
 
 }
+
+canvas{
+	width:100%;
+	height: auto;
+}
+
+.newsfeed_block{
+
+}
