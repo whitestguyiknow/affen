@@ -1,0 +1,26 @@
+#wrapper{
+  display: block;
+  position: relative;
+}
+
+
+#wrapper::after{
+	content: "";
+  background: url("images/background.jpg");
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
+}
+
+#background2{
+	background-image: url("images/background.jpg");
+}
+
+html, body{
+
+
+}
