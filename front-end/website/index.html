@@ -4,19 +4,16 @@
 
 <meta charset="utf-8">
 <script type="text/javascript" src="util/math.js"></script>
-<script type="text/javascript" src="plot/plot_bar.js"></script>
 <script type="text/javascript" src="plot/plot_line.js"></script>
+<script type="text/javascript" src="plot/plot_bar.js"></script>
+<script type="text/javascript" src="plot/plot_bar_down.js"></script>
 <script type="text/javascript" src="data/data.js"></script>
 <script type="text/javascript">
 
-function setup() {
-   // setup
-   console.log("Doing setup");
 
-   var mainCanvas = document.getElementById("main-canvas");
-   var mainCtx = mainCanvas.getContext("2d");
+var windowSize = 200;
 
-   var windowSize = 200;
+function init(data) {
 
    var first = function(index) {
       return data[3*index];
@@ -32,31 +29,38 @@ function setup() {
 
    var index = 0;
 
-   var update = function() {
+   // update function
+   var draw = function(canvas, index) {
 
-      mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+      index -= windowSize;
+      
+      var width = canvas.width;
+      var height = canvas.height;
+      var ctx = canvas.getContext("2d");
+
+      ctx.clearRect(0, 0, width, height);
 
       // top bar
-      plot_bar(
-            mainCtx,       // context
+      plot_bar_down(
+            ctx,           // context
             0,             // top
             0,             // left
-            640,           // width
-            240,           // height
-            first,         // data
+            width,         // width
+            height/3,      // height
+            third,         // data
             index,         // index
             windowSize,    // window size
             true,          // axis
-            "#00ff00"      // color
+            "#ff0000"      // color
             );
 
       // bottom bar
       plot_bar(
-            mainCtx,       // context
-            240,           // top
+            ctx,           // context
+            height/3 + 5,  // top
             0,             // left
-            640,           // width
-            240,           // height
+            width,         // width
+            2*height/3 - 5,// height
             second,        // data
             index,         // index
             windowSize,    // window size
@@ -66,22 +70,44 @@ function setup() {
 
       // bottom line
       plot_line(
-            mainCtx,       // context
-            240,           // top
+            ctx,           // context
+            height/3 + 5,  // top
             0,             // left
-            640,           // width
-            240,           // height
-            third,        // data
+            width,         // width
+            2*height/3 - 5,// height
+            first,         // data
             index,         // index
             windowSize,    // window size
             false,         // axis
-            "#ff0000"      // color
+            "#000000"      // color
             );
 
-      ++index;
    }
 
-   setInterval(update, 100);
+   return draw;
+}
+
+function setup() {
+
+   var drawData = init(data);
+   var mainIndex = 0;
+   var mainCanvas = document.getElementById("main-canvas");
+   var sideCanvas1 = document.getElementById("side-canvas1");
+   var sideCanvas2 = document.getElementById("side-canvas2");
+   var sideCanvas3 = document.getElementById("side-canvas3");
+   var sideCanvas4 = document.getElementById("side-canvas4");
+
+   setInterval(function()
+         {
+            drawData(mainCanvas, mainIndex);
+            drawData(sideCanvas1, mainIndex);
+            drawData(sideCanvas2, mainIndex);
+            drawData(sideCanvas3, mainIndex);
+            drawData(sideCanvas4, mainIndex);
+            ++mainIndex;
+         }
+         , 1000);
+
 }
 
 </script>
@@ -89,7 +115,22 @@ function setup() {
 </head>
 <body onload="setup()">
 
-<canvas id="main-canvas" width="640" height="480"></canvas>
+<!--
+TODO:
+   - layout
+   - design?
+   - other data sources?
+   - putting side canvas onto main canvas?
+   - accept/ignore button
+   - text feed
+
+-->
+
+<canvas id="main-canvas" width="600" height="400"></canvas>
+<canvas id="side-canvas1" width="300" height="200"></canvas>
+<canvas id="side-canvas2" width="300" height="200"></canvas>
+<canvas id="side-canvas3" width="300" height="200"></canvas>
+<canvas id="side-canvas4" width="300" height="200"></canvas>
 
 </body>
 </html>

@@ -19,7 +19,7 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
    for (var i = 0; i < window; ++i) {
 
       var x = left + i*dx;
-      var y = data(i + index)/stretch*height + top + height/2;
+      var y = top + height/2 - data(i + index)/stretch*height;
 
       ctx.moveTo(x, top + height/2);
       ctx.lineTo(x, y);
@@ -29,8 +29,8 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
    ctx.stroke();
 
    // axis
-   var step = 30.0;
-   var count = height/step;
+   var count = 6;
+   var step = height/count;
 
    for (var i = 1; i < count; ++i) {
       var y = top + i*step;
@@ -57,7 +57,7 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((stretch/2 - i/count*stretch).toExponential(1), left + 15, y + 5);
+         ctx.fillText((stretch/2 - i*stretch/count).toExponential(1), left + 15, y + 5);
       } else {
          // false = right
 
@@ -80,7 +80,7 @@ function plot_bar(ctx, top, left, width, height, data, index, window, axis, colo
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((stretch/2 - i/count*stretch).toExponential(1), left + width - 60, y + 5);
+         ctx.fillText((stretch/2 - i*stretch/count).toExponential(1), left + width - 60, y + 5);
 
       }
    }

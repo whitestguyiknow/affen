@@ -1,22 +1,27 @@
-function plot_line(ctx, top, left, width, height, data, index, window, axis, color) {
+function plot_bar_down(ctx, top, left, width, height, data, index, window, axis, color) {
 
    var dx = width/(window - 1);
 
    var lower = min(data, index, window);
    var upper = max(data, index, window);
 
-   ctx.beginPath();
+   var stretch = Math.max(upper, -lower)*2;
 
-   var y = top + (1 - normalize(data(index), lower, upper))*height;
-   var x = left;
-   ctx.moveTo(x, y);
+   // zero line:
+   ctx.beginPath();
+   ctx.moveTo(left, top);
+   ctx.lineTo(left + width, top);
+   ctx.strokeStyle = color;
+   ctx.stroke();
 
    // graph
-   for (var i = 1; i < window; ++i) {
+   ctx.beginPath();
+   for (var i = 0; i < window; ++i) {
 
-      var x = left + (i)*dx;
-      var y = top + (1 - normalize(data(i + index), lower, upper))*height;
+      var x = left + i*dx;
+      var y = top + data(i + index)*height;
 
+      ctx.moveTo(x, top);
       ctx.lineTo(x, y);
 
    }
@@ -24,8 +29,8 @@ function plot_line(ctx, top, left, width, height, data, index, window, axis, col
    ctx.stroke();
 
    // axis
-   var step = 30.0;
-   var count = height/step;
+   var count = 6;
+   var step = height/count;
 
    for (var i = 1; i < count; ++i) {
       var y = top + i*step;
@@ -52,7 +57,7 @@ function plot_line(ctx, top, left, width, height, data, index, window, axis, col
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((upper - i*(upper - lower)/count).toExponential(1), left + 15, y + 5);
+         ctx.fillText((i/count).toFixed(3), left + 15, y + 5);
       } else {
          // false = right
 
@@ -75,7 +80,7 @@ function plot_line(ctx, top, left, width, height, data, index, window, axis, col
          // unit
          ctx.font = "16px Arial";
          ctx.fillStyle = color;
-         ctx.fillText((upper - i*(upper - lower)/count).toExponential(1), left + width - 60, y + 5);
+         ctx.fillText((i/count).toFixed(3), left + width - 60, y + 5);
 
       }
    }
