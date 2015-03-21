@@ -16,7 +16,7 @@ function setup() {
    var mainCanvas = document.getElementById("main-canvas");
    var mainCtx = mainCanvas.getContext("2d");
 
-   var windowSize = 10;
+   var windowSize = 200;
 
    var first = function(index) {
       return data[3*index];
@@ -81,7 +81,7 @@ function setup() {
       ++index;
    }
 
-   setInterval(update, 1000);
+   setInterval(update, 100);
 }
 
 </script>
